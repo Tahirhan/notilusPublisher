@@ -29,11 +29,11 @@ namespace notilusPublisher
                     string pathToCopyBin = deleteAndCreateNewDateFolder(dateFolderStr, this.pluginBinAndExportPaths[key]);
                     CopyBinToPath(key, pathToCopyBin);
                     CreateRhiFile(pathToCopyBin, pluginName);
-                    Console.WriteLine($"[notilusPublisher] Published {pluginName}.");
+                    Console.WriteLine($"[{DateTime.Now.ToLongTimeString()} - notilusPublisher] Published {pluginName}.");
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"[notilusPublisher] Failed to publish {key.Split(@"\".ToArray()).Last()}.");
+                    Console.WriteLine($"[{DateTime.Now.ToLongTimeString()} - notilusPublisher] Failed to publish {key.Split(@"\".ToArray()).Last()}.");
                 }
             }
 
