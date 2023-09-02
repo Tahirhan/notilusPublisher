@@ -19,30 +19,60 @@ namespace notilusPublisher
 
         public Result run()
         {
-            string dateFolderStr = getDateFolderString();
+            (string plugin, string rhinoVersion, string dbType) = getDetails();
 
-            foreach (string key in this.pluginBinAndExportPaths.Keys)
+            string dateFolderStr = getDateFolderString(rhinoVersion, dbType);
+
+            string key = pluginBinAndExportPaths.Keys.Where(r => r.Contains(plugin)).FirstOrDefault();
+            try
             {
-                try
-                {
-                    string pluginName = key.Split(@"\".ToArray()).Last();
-                    string pathToCopyBin = deleteAndCreateNewDateFolder(dateFolderStr, this.pluginBinAndExportPaths[key]);
-                    CopyBinToPath(key, pathToCopyBin);
-                    CreateRhiFile(pathToCopyBin, pluginName);
-                    Console.WriteLine($"[{DateTime.Now.ToLongTimeString()} - notilusPublisher] Published {pluginName}.");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"[{DateTime.Now.ToLongTimeString()} - notilusPublisher] Failed to publish {key.Split(@"\".ToArray()).Last()}.");
-                }
+                string pluginName = key.Split(@"\".ToArray()).Last();
+                string pathToCopyBin = deleteAndCreateNewDateFolder(dateFolderStr, this.pluginBinAndExportPaths[key]);
+                CopyBinToPath(key, pathToCopyBin);
+                CreateRhiFile(pathToCopyBin, pluginName);
+                Console.WriteLine($"[{DateTime.Now.ToLongTimeString()} - notilusPublisher] Published {pluginName}.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"[{DateTime.Now.ToLongTimeString()} - notilusPublisher] Failed to publish {key.Split(@"\".ToArray()).Last()}.");
             }
 
             return Result.SUCCESS;
         }
 
+        private (string plugin, string rhinoVersion, string dbType) getDetails()
+        {
+            Dictionary<string, string> abbreviations = new Dictionary<string, string>() {
+                { "ns", "NotilusSteeler" },
+                { "nd", "NotilusDrafting" },
+                { "np", "NotilusPiping" },
+                { "nt", "NotilusTools" },
+                { "nrm", "NotilusRulemaster" },
+                { "npid", "NotilusPID" },
+                { "nob", "NotilusOnBoard" },
+                { "nc", "Notilus_Clipper" },
+            };
+
+            Console.WriteLine("Abbreviations");
+            foreach (string key in abbreviations.Keys) Console.WriteLine($"{key} : {abbreviations[key]}");
+            Console.WriteLine("-------------");
+
+            Console.WriteLine("Enter plugin code:");
+            string plugin = Console.ReadLine();
+            plugin = abbreviations[plugin];
+
+            Console.WriteLine("Enter Rhino version:");
+            string rhinoVersion = Console.ReadLine();
+
+            Console.WriteLine("Enter database type (Local or Cloud):");
+            string dbType = Console.ReadLine();
+
+            return (plugin, rhinoVersion, dbType);
+        }
+
         private void CreateRhiFile(string pathToCopyBin, string pluginName)
         {
-            ZipFile.CreateFromDirectory(pathToCopyBin, pathToCopyBin.Replace(@"\bin", @"\"+pluginName+".rhi"));
+            ZipFile.CreateFromDirectory(pathToCopyBin, pathToCopyBin.Replace(@"\bin", @"\" + pluginName + ".rhi"));
         }
 
         private void CopyBinToPath(string binPath, string pathToCopyBin)
@@ -72,9 +102,9 @@ namespace notilusPublisher
             return folderPath;
         }
 
-        private string getDateFolderString()
+        private string getDateFolderString(string rhinoVersion, string dbType)
         {
-            return DateTime.Now.ToString("yyyy.MM.dd").Substring(2);
+            return $"R{rhinoVersion} {dbType} {DateTime.Now.ToString("yyyy-MM-dd").Substring(2)}";
         }
     }
 }
