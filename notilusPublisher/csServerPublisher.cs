@@ -21,7 +21,7 @@ namespace notilusPublisher
         {
             (string plugin, string rhinoVersion, string dbType) = getDetails();
 
-            string dateFolderStr = getDateFolderString(rhinoVersion, dbType);
+            string dateFolderStr = getDateFolderString(rhinoVersion, dbType, plugin);
 
             string key = pluginBinAndExportPaths.Keys.Where(r => r.Contains(plugin)).FirstOrDefault();
             try
@@ -102,9 +102,9 @@ namespace notilusPublisher
             return folderPath;
         }
 
-        private string getDateFolderString(string rhinoVersion, string dbType)
+        private string getDateFolderString(string rhinoVersion, string dbType, string plugin)
         {
-            return $"R{rhinoVersion} {dbType} {DateTime.Now.ToString("yyyy-MM-dd").Substring(2)}";
+            return $"{plugin} R{rhinoVersion} {dbType} {DateTime.Now.ToString("yyyy-MM-dd").Substring(2)}";
         }
     }
 }
