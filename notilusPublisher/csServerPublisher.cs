@@ -51,6 +51,7 @@ namespace notilusPublisher
                 { "npid", "NotilusPID" },
                 { "nob", "NotilusOnBoard" },
                 { "nc", "Notilus_Clipper" },
+                { "nai", "NotilusAI" },
             };
 
             Console.WriteLine("Abbreviations");
