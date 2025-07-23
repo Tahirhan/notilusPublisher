@@ -52,6 +52,7 @@ namespace notilusPublisher
                 { "nob", "NotilusOnBoard" },
                 { "nc", "Notilus_Clipper" },
                 { "nai", "NotilusAI" },
+                { "nstb", "NotilusStabil" },
             };
 
             Console.WriteLine("Abbreviations");
