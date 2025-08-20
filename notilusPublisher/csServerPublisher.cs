@@ -23,13 +23,14 @@ namespace notilusPublisher
 
             string dateFolderStr = getDateFolderString(rhinoVersion, dbType, plugin);
 
-            string key = pluginBinAndExportPaths.Keys.Where(r => r.Contains(plugin)).FirstOrDefault();
+            string searchTerm = plugin == "NotilusDude" ? "RhinoPersonObject" : plugin;
+            string key = pluginBinAndExportPaths.Keys.Where(r => r.Contains(searchTerm)).FirstOrDefault();
             try
             {
                 string pluginName = key.Split(@"\".ToArray()).Last();
                 string pathToCopyBin = deleteAndCreateNewDateFolder(dateFolderStr, this.pluginBinAndExportPaths[key]);
                 CopyBinToPath(key, pathToCopyBin);
-                CreateRhiFile(pathToCopyBin, pluginName);
+                CreateRhiFile(pathToCopyBin, plugin);
                 Console.WriteLine($"[{DateTime.Now.ToLongTimeString()} - notilusPublisher] Published {pluginName}.");
             }
             catch (Exception e)
@@ -53,6 +54,7 @@ namespace notilusPublisher
                 { "nc", "Notilus_Clipper" },
                 { "nai", "NotilusAI" },
                 { "nhs", "NotilusHydroStab" },
+                { "ndu", "NotilusDude" },
             };
 
             Console.WriteLine("Abbreviations");

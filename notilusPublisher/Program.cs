@@ -27,6 +27,7 @@ namespace notilusPublisher
             pathPairs.Add(@"C:\Users\Tahirhan\source\repos\Notilus_Clipper\Notilus_Clipper", @"\\NOTILUSNAS\Server\15- Notilus Software\Notilus_Clipper\Versions_");
             pathPairs.Add(@"C:\Users\Tahirhan\source\repos\NotilusAI", @"\\NOTILUSNAS\Server\15- Notilus Software\NotilusAI\Versions");
             pathPairs.Add(@"C:\Users\Tahirhan\source\repos\NotilusHydroStab", @"\\NOTILUSNAS\Server\15- Notilus Software\NotilusHydroStab\Versions");
+            pathPairs.Add(@"C:\Users\Tahirhan\source\repos\RhinoPersonObject\RhinoPersonObject", @"\\NOTILUSNAS\Server\15- Notilus Software\NotilusDude\Versions");
 
             csServerPublisher serverPublisher = new csServerPublisher(pathPairs);
             serverPublisher.run();
