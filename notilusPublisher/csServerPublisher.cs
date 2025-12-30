@@ -19,12 +19,16 @@ namespace notilusPublisher
 
         public Result run()
         {
-            (string plugin, string rhinoVersion, string dbType) = getDetails();
+            (string plugin, string abbrv, string rhinoVersion, string dbType) = getDetails();
 
             string dateFolderStr = getDateFolderString(rhinoVersion, dbType, plugin);
 
             string searchTerm = plugin == "NotilusDude" ? "RhinoPersonObject" : plugin;
-            string key = pluginBinAndExportPaths.Keys.Where(r => r.Contains(searchTerm)).FirstOrDefault();
+            string key;
+            if (abbrv.EndsWith("8"))
+                key = pluginBinAndExportPaths.Keys.Where(r => r.Contains(searchTerm) && r.Contains("NET8")).FirstOrDefault();
+            else
+                key = pluginBinAndExportPaths.Keys.Where(r => r.Contains(searchTerm)).FirstOrDefault();
             try
             {
                 string pluginName = key.Split(@"\".ToArray()).Last();
@@ -41,17 +45,20 @@ namespace notilusPublisher
             return Result.SUCCESS;
         }
 
-        private (string plugin, string rhinoVersion, string dbType) getDetails()
+        private (string plugin, string abbrv, string rhinoVersion, string dbType) getDetails()
         {
             Dictionary<string, string> abbreviations = new Dictionary<string, string>() {
                 { "ns", "NotilusSteeler" },
+                { "ns8", "NotilusSteeler" },
                 { "nd", "NotilusDrafting" },
+                { "nd8", "NotilusDrafting" },
                 { "np", "NotilusPiping" },
                 { "nt", "NotilusTools" },
                 { "nrm", "NotilusRulemaster" },
                 { "npid", "NotilusPID" },
                 { "nob", "NotilusOnBoard" },
                 { "nc", "Notilus_Clipper" },
+                { "nc8", "NotilusClipper" },
                 { "nai", "NotilusAI" },
                 { "nhs", "NotilusHydroStab" },
                 { "ndu", "NotilusDude" },
@@ -62,8 +69,8 @@ namespace notilusPublisher
             Console.WriteLine("-------------");
 
             Console.WriteLine("Enter plugin code:");
-            string plugin = Console.ReadLine();
-            plugin = abbreviations[plugin];
+            string abbrv = Console.ReadLine();
+            string plugin = abbreviations[abbrv];
 
             Console.WriteLine("Enter Rhino version:");
             string rhinoVersion = Console.ReadLine();
@@ -71,7 +78,7 @@ namespace notilusPublisher
             Console.WriteLine("Enter database type (Local or Cloud):");
             string dbType = Console.ReadLine();
 
-            return (plugin, rhinoVersion, dbType);
+            return (plugin, abbrv, rhinoVersion, dbType);
         }
 
         private void CreateRhiFile(string pathToCopyBin, string pluginName)

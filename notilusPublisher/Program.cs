@@ -18,13 +18,16 @@ namespace notilusPublisher
         {
             Dictionary<string, string> pathPairs = new Dictionary<string, string>();
             pathPairs.Add(@"C:\Users\Tahirhan\source\repos\notilussteeler\NotilusSteeler", @"\\NOTILUSNAS\Server\15- Notilus Software\NotilusSteeler\Versions");
+            pathPairs.Add(@"C:\Users\Tahirhan\source\reposNET8\NotilusSteeler", @"\\NOTILUSNAS\Server\15- Notilus Software\NotilusSteeler\VersionsNET8");
             pathPairs.Add(@"C:\Users\Tahirhan\source\repos\NotilusDrafting\NotilusDrafting", @"\\NOTILUSNAS\Server\15- Notilus Software\Notilus Drafting\Versions");
+            pathPairs.Add(@"C:\Users\Tahirhan\source\reposNET8\NotilusDrafting", @"\\NOTILUSNAS\Server\15- Notilus Software\Notilus Drafting\VersionsNET8");
             pathPairs.Add(@"C:\Users\Tahirhan\source\repos\NotilusPiping\NotilusPiping", @"\\NOTILUSNAS\Server\15- Notilus Software\NotilusPiping\Versions");
             pathPairs.Add(@"C:\Users\Tahirhan\source\repos\NotilusTools\NotilusTools", @"\\NOTILUSNAS\Server\15- Notilus Software\NotilusTools\Versions");
             pathPairs.Add(@"C:\Users\Tahirhan\source\repos\NotilusRulemaster\NotilusRulemaster", @"\\NOTILUSNAS\Server\15- Notilus Software\NotilusRulemaster\Versions");
             pathPairs.Add(@"C:\Users\Tahirhan\source\repos\NotilusPID\NotilusPID", @"\\NOTILUSNAS\Server\15- Notilus Software\NotilusPID\Versions");
             pathPairs.Add(@"C:\Users\Tahirhan\source\repos\NotilusOnBoard\NotilusOnBoard", @"\\NOTILUSNAS\Server\15- Notilus Software\NotilusOnBoard\Versions");
             pathPairs.Add(@"C:\Users\Tahirhan\source\repos\Notilus_Clipper\Notilus_Clipper", @"\\NOTILUSNAS\Server\15- Notilus Software\Notilus_Clipper\Versions_");
+            pathPairs.Add(@"C:\Users\Tahirhan\source\reposNET8\NotilusClipper", @"\\NOTILUSNAS\Server\15- Notilus Software\Notilus_Clipper\VersionsNET8");
             pathPairs.Add(@"C:\Users\Tahirhan\source\repos\NotilusAI", @"\\NOTILUSNAS\Server\15- Notilus Software\NotilusAI\Versions");
             pathPairs.Add(@"C:\Users\Tahirhan\source\repos\NotilusHydroStab", @"\\NOTILUSNAS\Server\15- Notilus Software\NotilusHydroStab\Versions");
             pathPairs.Add(@"C:\Users\Tahirhan\source\repos\RhinoPersonObject\RhinoPersonObject", @"\\NOTILUSNAS\Server\15- Notilus Software\NotilusDude\Versions");
